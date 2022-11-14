@@ -55,40 +55,44 @@ code {
 
 .nav-link {
   display: flex;
-  align-items: center;
-  height: 50%;
+  height: 100%;
   width: 33%;
 }
 
 .nav-link-left {
   justify-content: flex-start;
-  margin-left: 1%;
+  align-items: center;
+  /* max-width: 33%; */
 }
 
 .nav-link-right {
   justify-content: flex-end;
-  margin-right: 1%;
+  align-items: center;
+  /* max-width: 33%; */
 }
 
 .nav-button-img {
   display: flex;
-  max-height: 100%;
+  max-height: 50%;
+  width: 40%;
+  z-index: 99;
 }
 
 .nav-button-img-left {
-  margin-left: 12%;
-}
-
-.nav-button-name-left {
-  margin-left: 2%;
+  max-height: 50%;
 }
 
 .nav-button-img-right {
-  margin-left: 2%;
+  max-height: 50%;
 }
 
-.nav-button-name-right {
-  margin-left: 12%;
+.left {
+  padding-left: 10px;
+}
+
+.right {
+  padding-right: 10px;
+  justify-content: flex-end;
 }
 
 a {
@@ -285,7 +289,7 @@ a {
   width: 96%;
   text-align: left;
   margin-top: 3%;
-  overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .textarea {
