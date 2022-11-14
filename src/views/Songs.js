@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from '../firebase'
-import { collection, getDocs, query, where } from "firebase/firestore";
-// import { hover } from '@testing-library/user-event/dist/hover';
+import { collection, getDocs, query, where, deleteDoc, doc } from "firebase/firestore";
 
 
 export default function Songs() {
@@ -29,37 +28,19 @@ export default function Songs() {
         navigate('/')
     };
 
-    // const readTracks = async () => {
-    //     const querySnapshot = await getDocs(collection(db, "tracks"));
-    //     querySnapshot.forEach((doc) => {
-    //         console.log(`${doc.id} => ${doc.data()}`);
-    //     });
-    // };
-
-    // const deleteSong = async (event) => {
-    //     let deleteID = (event.target.id);
-    //     console.log(deleteID)
-
-    //     const q = query(collection(db, "tracks"), where("account", "==", `${user.email}`), where("idTrack", "==", `${deleteID}`));
+    // const deleteSong = async (delete_id) => {
+    //     console.log(delete_id);
+    //     const q = query(collection(db, "tracks"), where("account", "==", `${user.email}`), where("idTrack", "==", `${delete_id}`));
+    //     console.log(q);
 
     //     const querySnapshot = await getDocs(q);
     //     querySnapshot.forEach((doc) => {
     //       console.log(doc.id, " => ", doc.data());
-    //       const docRef = doc(db, "tracks", doc.id);
-    //       console.log(docRef)
-    //       deleteDoc(docRef)
+    //       const docRef = (db, "tracks", doc.id);
+    //       console.log(docRef);
+    //       deleteDoc(doc(db, "tracks", docRef));
     // }); 
-    // }
-
-    // const goToSpotify = async (event) => {
-    //     let spotifyLink = (event.target.id);
-    //     console.log(spotifyLink)
-    //     const openInNewTab = () => {
-    //         window.open(spotifyLink, '_blank', 'noopener,noreferrer');
-    //       };
-    //     navigate(`{()=>window.open('${spotifyLink}','_blank')}`)
-    // }
-
+    // };
 
     useEffect(() => {
         const q = query(tracksRef, where("account", "==", `${user.email}`));
@@ -85,25 +66,25 @@ export default function Songs() {
                 const newAlbumArtworkOverlay = document.createElement('div');
                 newAlbumArtworkOverlay.className += 'artwork-overlay';
 
-                const newDeleteButton = document.createElement('button');
-                newDeleteButton.className += 'card-button';
-                newDeleteButton.id += `${songID}`
-                newDeleteButton.innerText += 'Delete';
-                // newDeleteButton.addEventListener('click', deleteSong)
-
+                // const newDeleteButton = document.createElement('button');
+                // newDeleteButton.className += 'card-button';
+                // newDeleteButton.id += `${songID}`
+                // newDeleteButton.innerText += 'Delete';
+                // newDeleteButton.onclick = function() {deleteSong(songID)}
 
                 const newListenButton = document.createElement('button');
                 newListenButton.className += 'card-button';
                 newListenButton.id += `${songURL}`;
                 newListenButton.innerText += 'Listen';
+                // newListenButton.setAttribute('onClick', {playSong(this.id)});
+                newListenButton.onclick = function() {playSong(songURL)};
 
                 const newSpotifyButton = document.createElement('button');
                 newSpotifyButton.className += 'card-button';
                 newSpotifyButton.id += `${spotifyURL}`
-                newSpotifyButton.innerText += 'Spotify';
-                // newSpotifyButton.addEventListener('click', goToSpotify)
+                newSpotifyButton.innerHTML += `<a href="${spotifyURL}" target="_blank">Spotify</a>`;
 
-                newAlbumArtworkOverlay.appendChild(newDeleteButton)
+                // newAlbumArtworkOverlay.appendChild(newDeleteButton)
                 newAlbumArtworkOverlay.appendChild(newListenButton)
                 newAlbumArtworkOverlay.appendChild(newSpotifyButton)
 
@@ -118,6 +99,14 @@ export default function Songs() {
     });
 
     let audio
+
+    const playSong = (clicked_id) => {
+        if (audio) {
+          stopSong();
+        }
+        audio = new Audio(clicked_id);
+        return audio.play();
+      };
 
     // Stop song 
     const stopSong = () => {
