@@ -328,7 +328,7 @@ a {
   width: 100%;
   height: 100%;
   padding: 5px;
-  opacity: 1;
+  opacity: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -342,7 +342,7 @@ a {
 }
 
 .card-button {
-  height: 9%;
+  height: 15%;
   width: 25%;
   border-radius: 10px;
   background-color: rgb(77, 77, 77);
