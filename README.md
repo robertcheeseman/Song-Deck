@@ -1,6 +1,18 @@
-# Getting Started with Create React App
+# Getting Started with Song Deck
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Song Deck was written to fetch a random song from Spotify's API and return it to the listener for them to either dislike/skip the song or like/save the song... think of it as a dating app but for music!
+
+In order for this to successfully work after you've cloned the repository, you'll have to make sure you have a free Spotify Developer Account ( https://developer.spotify.com/dashboard/ ) in order to create your own Client ID and Secret Key to access the Spotify API.  Once you have these, you can paste them into a .env file or directly into 'search.js' in this snippet of code:
+
+// Spotify Access
+  
+const clientID = process.env.REACT_APP_SPOTIFY_CLIENT_ID
+  
+const secretID = process.env.REACT_APP_SPOTIFY_KEY
+
+That should be it!  Happy hunting for that next favorite song of yours!
 
 ## Available Scripts
 
