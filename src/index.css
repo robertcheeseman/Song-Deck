@@ -17,6 +17,7 @@ code {
 
 #tape-deck-container {
   background-image: url('../public/images/cassette-bg-darker.png');
+  background-color: darkslategrey;
   display: flex;
   flex-direction: column;
   justify-content: center;
